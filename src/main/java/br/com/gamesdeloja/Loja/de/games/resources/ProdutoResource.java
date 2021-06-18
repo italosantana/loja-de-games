@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.gamesdeloja.Loja.de.games.models.Produto;
+import br.com.gamesdeloja.Loja.de.games.repository.ProdutoRepository;
+
 // mapeando o end
 @RestController
 @RequestMapping(value="/api")
@@ -26,7 +29,7 @@ public class ProdutoResource {
 	}
 	@GetMapping("/produto/{id}") // procurar por um produto em específico
 	public Produto listaProdutoUnico(@PathVariable(value="id") long id){
-			return produtoRepository.findBy(id);
+			return produtoRepository.findById(id);
 	}
 	
 	@PostMapping("/produto") // escolher o produto
@@ -40,7 +43,7 @@ public class ProdutoResource {
 	}
 	
 	@PutMapping("/produto") // trocar o produto
-	public void atualizaProduto(@RequestBody Produto produto) {
+	public Produto atualizaProduto(@RequestBody Produto produto) {
 		return produtoRepository.save(produto);
 	}
 }
